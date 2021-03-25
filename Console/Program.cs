@@ -14,31 +14,40 @@ namespace Console
             //ColorTest();
         }
 
-        private static void ColorTest()
-        {
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                System.Console.WriteLine(color.ColorName);
-            }
-        }
+        //private static void ColorTest()
+        //{
+        //    ColorManager colorManager = new ColorManager(new EfColorDal());
+        //    foreach (var color in colorManager.GetAll())
+        //    {
+        //        System.Console.WriteLine(color.ColorName);
+        //    }
+        //}
 
-        private static void BrandTest()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
-            {
-                System.Console.WriteLine(brand.BrandName);
-            }
-        }
+        //private static void BrandTest()
+        //{
+        //    BrandManager brandManager = new BrandManager(new EfBrandDal());
+        //    foreach (var brand in brandManager.GetAll())
+        //    {
+        //        System.Console.WriteLine(brand.BrandName);
+        //    }
+        //}
 
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                System.Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    System.Console.WriteLine(car.CarName + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                }
             }
+            else
+            {
+                System.Console.WriteLine(result.Message);
+            }
+
         }
     }
 }
